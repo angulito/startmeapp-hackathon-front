@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: startmeapp-hackathon-app
+  name: startmeapp-hackathon-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: startmeapp-hackathon-app
+    spec:
+      containers:
+      - image: registry.hub.docker.com/angulito/startmeapp-hackathon-front:latest
+        name: startmeapp-hackathon-app
+        ports:
+        - name: startmeapp-hackathon-app
+          containerPort: 3000
+          hostPort: 3000
+          env:
+          - name: BACK_ENDPOINT
+            value: startmeapp-hackathon-app-back:5000
